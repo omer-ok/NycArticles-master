@@ -1,0 +1,160 @@
+package com.kampen.riksSe.utils;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.kampen.riksSe.BaseActivity;
+import com.kampen.riksSe.api.remote_api.APIUrl;
+
+import static com.kampen.riksSe.api.remote_api.APIUrl.BASE_PROD_URL;
+import static com.kampen.riksSe.api.remote_api.APIUrl.BASE_URL;
+import static com.kampen.riksSe.utils.PreferencesUtility.API_SYNCED_DATE;
+import static com.kampen.riksSe.utils.PreferencesUtility.APP_STATE_PREF;
+import static com.kampen.riksSe.utils.PreferencesUtility.APP_STATUS;
+import static com.kampen.riksSe.utils.PreferencesUtility.BASE_URL_SESSION;
+import static com.kampen.riksSe.utils.PreferencesUtility.CHASE_STAR;
+import static com.kampen.riksSe.utils.PreferencesUtility.CHASE_STAR_STEPS;
+import static com.kampen.riksSe.utils.PreferencesUtility.CHASE_STAR_STEPS_CURRENT;
+import static com.kampen.riksSe.utils.PreferencesUtility.CHAT_ACTIVTY_STATUS;
+import static com.kampen.riksSe.utils.PreferencesUtility.CHAT_COUNT;
+import static com.kampen.riksSe.utils.PreferencesUtility.CHAT_COUNT_CURRENT;
+import static com.kampen.riksSe.utils.PreferencesUtility.CHAT_COUNT_ZERO;
+import static com.kampen.riksSe.utils.PreferencesUtility.CURRENT_DATE_COMPITION;
+import static com.kampen.riksSe.utils.PreferencesUtility.DAILY_DATE;
+import static com.kampen.riksSe.utils.PreferencesUtility.DAILY_IMAGE;
+import static com.kampen.riksSe.utils.PreferencesUtility.DAILY_LOCATION;
+import static com.kampen.riksSe.utils.PreferencesUtility.DISTANCE;
+import static com.kampen.riksSe.utils.PreferencesUtility.ENCRYPTION_KEY;
+import static com.kampen.riksSe.utils.PreferencesUtility.FCM_TOKEN;
+import static com.kampen.riksSe.utils.PreferencesUtility.LAN_IN_PREF;
+import static com.kampen.riksSe.utils.PreferencesUtility.LAT_IN_PREF;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_DATE;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_DATE_STEPS;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_FCM;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_FIRST_TIME;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_PREF;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_PREF_Email;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_PREF_pass;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_SPLASH;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_STEPS;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_IN_STEPS_FIRST_TIME;
+import static com.kampen.riksSe.utils.PreferencesUtility.LOGGED_TESTER_USER;
+import static com.kampen.riksSe.utils.PreferencesUtility.NEED_TO_UPDATE;
+import static com.kampen.riksSe.utils.PreferencesUtility.NUTRITION_PDF_URL;
+import static com.kampen.riksSe.utils.PreferencesUtility.REQUEST_CODE;
+import static com.kampen.riksSe.utils.PreferencesUtility.SENSOR_STATIC_STEPS;
+import static com.kampen.riksSe.utils.PreferencesUtility.SENSOR_STEPS;
+import static com.kampen.riksSe.utils.PreferencesUtility.STOP_WATCH_ON_PAUSE;
+import static com.kampen.riksSe.utils.PreferencesUtility.TODAY_STEPS;
+import static com.kampen.riksSe.utils.PreferencesUtility.TOKEN_PREF;
+import static com.kampen.riksSe.utils.PreferencesUtility.USER_ID;
+import static com.kampen.riksSe.utils.PreferencesUtility.REMMBER_ME;
+import static com.kampen.riksSe.utils.PreferencesUtility.WAIST_TODAY;
+import static com.kampen.riksSe.utils.PreferencesUtility.WEIGHT_TODAY;
+import static com.kampen.riksSe.utils.UtilityTz.convertStaticTimeToUTC;
+
+public class SaveSharedPreference {
+
+
+
+    static SharedPreferences getPreferences(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    /**
+     * Set the Login Status
+     * @param context
+     * @param //loggedIn
+     */
+
+
+
+
+    public static void setLoggedInSplash(Context context, boolean loggedIn) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(LOGGED_IN_SPLASH, loggedIn);
+        editor.apply();
+    }
+
+
+    public static boolean getLoggedInSplash(Context context){
+        return getPreferences(context).getBoolean(LOGGED_IN_SPLASH, true);
+    }
+
+    public static void setLoggedInFCM(Context context, boolean loggedIn) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(LOGGED_IN_FCM, loggedIn);
+        editor.apply();
+    }
+
+
+    public static boolean getLoggedInFCM(Context context){
+        return getPreferences(context).getBoolean(LOGGED_IN_FCM, true);
+    }
+
+
+    public static void setSyncApiFirstTimeStatus(Context context, boolean loggedIn) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(LOGGED_IN_FCM, loggedIn);
+        editor.apply();
+    }
+
+
+    public static boolean getLoggedInFCM(Context context){
+        return getPreferences(context).getBoolean(LOGGED_IN_FCM, true);
+    }
+
+    public static void setApplicationState(Context context, BaseActivity.ApplicationState applicationState) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putString(APP_STATE_PREF, applicationState.toString());
+        editor.apply();
+    }
+
+    public static  BaseActivity.ApplicationState  getApplicationState(Context context) {
+
+
+       return   BaseActivity.ApplicationState.toEnum(getPreferences(context).getString(APP_STATE_PREF, BaseActivity.ApplicationState.OnCreate_ENUM.toString()));
+    }
+
+
+
+    public static void setLoggedIn(Context context, boolean loggedIn) {
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(LOGGED_IN_PREF, loggedIn);
+        editor.apply();
+    }
+
+
+
+
+
+    public static void setUsertodaySteps(Context context,int Steps){
+
+        try {
+
+            SharedPreferences.Editor editor = getPreferences(context).edit();
+            editor.putInt(TODAY_STEPS,Steps);
+            editor.apply();
+        }catch (Exception ex){
+
+        }
+
+    }
+
+    public static int getUserTodaySteps(Context context){
+        return getPreferences(context).getInt(TODAY_STEPS, 0);
+    }
+
+    public static Boolean getChatActivityState(Context context){
+        return getPreferences(context).getBoolean(CHAT_ACTIVTY_STATUS, false);
+    }
+
+    public static void setChatActivityState(Context context,Boolean chatStatus){
+        SharedPreferences.Editor editor = getPreferences(context).edit();
+        editor.putBoolean(CHAT_ACTIVTY_STATUS,chatStatus);
+        editor.apply();}
+
+    public static Boolean getAppKilledState(Context context){
+        return 

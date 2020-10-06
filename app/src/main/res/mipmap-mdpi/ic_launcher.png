@@ -1,0 +1,30 @@
+package com.kampen.riksSe.data_manager;
+
+import android.content.Context;
+import android.os.Build;
+import android.util.Log;
+
+import com.kampen.riksSe.DI.LocalApiService;
+import com.kampen.riksSe.DI.ServiceLocator;
+import com.kampen.riksSe.MyApplication;
+import com.kampen.riksSe.api.remote_api.ResponseStatus;
+import com.kampen.riksSe.api.remote_api.V2_api_model.AllHomeDataNew;
+import com.kampen.riksSe.api.remote_api.V2_api_model.Competition;
+import com.kampen.riksSe.api.remote_api.V2_api_model.Result;
+import com.kampen.riksSe.api.remote_api.models.all_data_remote.AllData;
+import com.kampen.riksSe.api.remote_api.models.all_data_remote.home.activities.Remote_DayActivity;
+import com.kampen.riksSe.leader.activity.MainActivityContract;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.V3_Model.ActivityDaily;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.V3_Model.MotivationalVideo;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.newP.A_DayActivityList;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.newP.A_DayDB;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.newP.A_WeekDB;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.newP.ActivitiesDB;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.newP.MotivationVideos;
+import com.kampen.riksSe.leader.activity.fragments.home.addactivity.model.newP.VideoM;
+import com.kampen.riksSe.leader.activity.fragments.home.nutrition.model.V3_Model.MealType;
+import com.kampen.riksSe.leader.activity.fragments.home.nutrition.model.V3_Model.N_Days_V;
+import com.kampen.riksSe.leader.activity.fragments.home.nutrition.model.newP.DayNutritionDB;
+import com.kampen.riksSe.leader.activity.fragments.home.nutrition.model.newP.DayNutritionMealOptionsDB;
+import com.kampen.riksSe.leader.activity.fragments.home.nutrition.model.newP.MealIngrediantsOptionsDB;
+import com.kampen.riksSe.leader.activity.fragments.home.nu
