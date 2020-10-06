@@ -29,7 +29,9 @@ class ArticleAdapter(
 
     override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
         holder.recylerviewArticleItemBinding.list = articles[position]
-        loadImage(holder.recylerviewArticleItemBinding.articleImage,articles[position].media.get(0).mediametadata.get(0).url)
+        if(articles[position].media.size>0){
+            loadImage(holder.recylerviewArticleItemBinding.articleImage,articles[position].media.get(0).mediametadata.get(0).url)
+        }
         holder.recylerviewArticleItemBinding.articleItem.setOnClickListener {
             listener.onRecyclerViewItemClick(holder.recylerviewArticleItemBinding.articleItem, articles[position])
         }
